@@ -8,8 +8,7 @@ const Navbar = () => {
       <div className="nav-links">
         <a href="#download">Download App</a>
         <a href="#partner">Partner With Us</a>
-        <a href="#installment">Installment</a>
-        <a href="#saved">Saved</a>
+
         <a href="#booking">My Booking</a>
         <div className="language-selector">
           <span className="language-icon">🌐</span>

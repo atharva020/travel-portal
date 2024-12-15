@@ -19,6 +19,9 @@ mongoose
 const destinationRoutes = require("./routes/destinations");
 app.use("/api/destinations", destinationRoutes);
 
+const guidesRouter = require("./routes/guides");
+app.use("/api/guides", guidesRouter);
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

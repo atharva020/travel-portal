@@ -1,19 +1,123 @@
-.guides {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.guides h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-.guides-container {
+.guides-section {
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.guides-section h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.guides-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.tab.active {
+  background: #007bff;
+  color: white;
+}
+
+.guides-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.guide-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.guide-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.guide-info {
+  padding: 1rem;
+}
+
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button.prev:disabled,
+.pagination button.next:disabled {
+  background: #f5f5f5;
+  border-color: #ddd;
+  color: #999;
 } 
