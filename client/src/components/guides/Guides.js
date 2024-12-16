@@ -5,6 +5,15 @@ const Guides = () => {
   const [guides, setGuides] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedGuide, setSelectedGuide] = useState(null);
+  const [bookingForm, setBookingForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    travelers: 1,
+    specialRequests: "",
+  });
   const guidesPerPage = 6;
 
   useEffect(() => {
@@ -44,6 +53,64 @@ const Guides = () => {
 
   const tabs = ["All", "Trending", "Features"];
 
+  const handleBookNow = (guide) => {
+    setSelectedGuide(guide);
+    setIsBookingModalOpen(true);
+  };
+
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Submitting booking:", {
+        ...bookingForm,
+        guideId: selectedGuide._id,
+        guideName: selectedGuide.title,
+        totalPrice: selectedGuide.price * bookingForm.travelers,
+      });
+
+      const response = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...bookingForm,
+          guideId: selectedGuide._id,
+          guideName: selectedGuide.title,
+          totalPrice: selectedGuide.price * bookingForm.travelers,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create booking");
+      }
+
+      const data = await response.json();
+      console.log("Booking created successfully:", data);
+      alert("Booking successful!");
+      setIsBookingModalOpen(false);
+      setBookingForm({
+        name: "",
+        email: "",
+        phone: "",
+        travelers: 1,
+        specialRequests: "",
+      });
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      alert("Failed to create booking. Please try again.");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBookingForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="guides-section">
       <h2>Guides for your next vacation</h2>
@@ -77,11 +144,90 @@ const Guides = () => {
                 <span className="price">${guide.price}</span>
               </div>
               <p className="description">{guide.description}</p>
-              <button className="read-more">Read more</button>
+              <button
+                className="book-now-btn"
+                onClick={() => handleBookNow(guide)}
+              >
+                Book Now
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Booking Modal */}
+      {isBookingModalOpen && (
+        <div className="booking-modal-overlay">
+          <div className="booking-modal">
+            <button
+              className="close-modal"
+              onClick={() => setIsBookingModalOpen(false)}
+            >
+              ×
+            </button>
+            <h2>Book {selectedGuide.title}</h2>
+            <form onSubmit={handleBookingSubmit}>
+              <div className="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={bookingForm.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={bookingForm.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Phone:</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={bookingForm.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Number of Travelers:</label>
+                <input
+                  type="number"
+                  name="travelers"
+                  min="1"
+                  value={bookingForm.travelers}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Special Requests:</label>
+                <textarea
+                  name="specialRequests"
+                  value={bookingForm.specialRequests}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="booking-summary">
+                <p>
+                  Total Price: ${selectedGuide.price * bookingForm.travelers}
+                </p>
+              </div>
+              <button type="submit" className="submit-booking">
+                Confirm Booking
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {totalPages > 1 && (
         <div className="pagination">
