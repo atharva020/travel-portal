@@ -25,6 +25,9 @@ app.use("/api/guides", guidesRouter);
 const bookingsRouter = require("./routes/bookings");
 app.use("/api/bookings", bookingsRouter);
 
+const authRouter = require("./routes/auth");
+app.use("/api/auth", authRouter);
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
