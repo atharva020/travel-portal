@@ -25,6 +25,7 @@
   font-size: 1rem;
   border-radius: 6px;
   transition: all 0.3s ease;
+
   border: 1px solid #7f8da1;
 }
 
@@ -120,12 +121,27 @@
 }
 
 .logout-btn {
-  background-color: #dc3545;
+  background-color: #ff4444;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin: 15px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.logout-btn:hover {
+  background-color: #ff0000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:active {
+  transform: translateY(1px);
 }
 
 h2 {

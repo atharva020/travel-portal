@@ -218,3 +218,21 @@
   font-size: 20px;
   width: 100%;
 }
+
+.login-prompt {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.login-prompt a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}

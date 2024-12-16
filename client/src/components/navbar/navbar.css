@@ -29,10 +29,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2rem;
-  flex: 1;
-  margin-left: 2rem;
+  gap: 1rem;
 }
 
 .nav-items {
@@ -79,25 +76,19 @@
   cursor: pointer;
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  margin-bottom: 10px;
-  font-weight: 500;
   transition: color 0.3s ease;
-  border-radius: 4px;
-  white-space: nowrap;
 }
 
 .logout-button:hover {
-  color: #dc3545;
-  background-color: rgba(255, 255, 255, 0.1);
+  color: #ff4444;
 }
 
 .user-name {
-  color: #007bff;
-  font-weight: 500;
+  color: white;
   padding: 0.5rem 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  white-space: nowrap;
+  margin-right: 1rem;
 }
 
 /* Responsive adjustments */
@@ -112,6 +103,18 @@
 
   .user-name {
     display: none;
+  }
+}
+
+.navbar-brand {
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    margin-left: 0;
+    justify-content: flex-end;
+    width: 100%;
   }
 }
 

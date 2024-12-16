@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./guides.css";
+import { useNavigate } from "react-router-dom";
 
 const Guides = () => {
   const [guides, setGuides] = useState([]);
@@ -15,6 +16,15 @@ const Guides = () => {
     specialRequests: "",
   });
   const guidesPerPage = 6;
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   useEffect(() => {
     fetchGuides();
@@ -54,6 +64,18 @@ const Guides = () => {
   const tabs = ["All", "Trending", "Features"];
 
   const handleBookNow = (guide) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      localStorage.setItem("pendingBooking", JSON.stringify(guide));
+      navigate("/login");
+      return;
+    }
+
+    if (user.role === "admin") {
+      return; // Prevent admin from booking
+    }
+
     setSelectedGuide(guide);
     setIsBookingModalOpen(true);
   };
@@ -61,33 +83,31 @@ const Guides = () => {
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Submitting booking:", {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const bookingData = {
         ...bookingForm,
+        userId: user._id,
         guideId: selectedGuide._id,
         guideName: selectedGuide.title,
         totalPrice: selectedGuide.price * bookingForm.travelers,
-      });
+        status: "pending",
+      };
 
       const response = await fetch("http://localhost:5000/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...bookingForm,
-          guideId: selectedGuide._id,
-          guideName: selectedGuide.title,
-          totalPrice: selectedGuide.price * bookingForm.travelers,
-        }),
+        body: JSON.stringify(bookingData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create booking");
+        throw new Error(data.message || "Failed to create booking");
       }
 
-      const data = await response.json();
-      console.log("Booking created successfully:", data);
       alert("Booking successful!");
       setIsBookingModalOpen(false);
       setBookingForm({
@@ -98,7 +118,6 @@ const Guides = () => {
         specialRequests: "",
       });
     } catch (error) {
-      console.error("Error creating booking:", error);
       alert("Failed to create booking. Please try again.");
     }
   };
@@ -144,12 +163,14 @@ const Guides = () => {
                 <span className="price">${guide.price}</span>
               </div>
               <p className="description">{guide.description}</p>
-              <button
-                className="book-now-btn"
-                onClick={() => handleBookNow(guide)}
-              >
-                Book Now
-              </button>
+              {user?.role !== "admin" && (
+                <button
+                  className="book-now-btn"
+                  onClick={() => handleBookNow(guide)}
+                >
+                  Book Now
+                </button>
+              )}
             </div>
           </div>
         ))}

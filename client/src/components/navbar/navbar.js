@@ -27,7 +27,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link to="/">Home</Link>
-                  <Link to="/bookings">My Bookings</Link>
+                  <Link to="/my-bookings">My Bookings</Link>
                 </>
               )}
               <button onClick={handleLogout} className="logout-button">
