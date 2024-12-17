@@ -37,3 +37,29 @@ Before running this project, make sure you have the following installed:
 1. Clone the repository
 ```bash
 git clone https://github.com/atharva020/travel-portal.git
+```
+2. Install Backend Dependencies
+```
+cd client npm init
+cd ..
+cd server npm init
+```
+3.Start the App
+start the frontend
+```
+cd client
+npm start
+```
+Start the backend
+```
+cd server
+node server.js
+```
+## Configuration
+
+1. Create a `.env` file in the server directory with the following variables:
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+```
