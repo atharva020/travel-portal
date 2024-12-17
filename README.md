@@ -70,5 +70,5 @@ PORT=5000
 ![Screenshot 2024-12-17 153626](https://github.com/user-attachments/assets/713372d5-6e62-4ca4-b676-19ecbab27728)
 ![Screenshot 2024-12-17 153648](https://github.com/user-attachments/assets/bc28d2ae-3913-4303-8361-eb57b46a590e)
 ![Screenshot 2024-12-17 153710](https://github.com/user-attachments/assets/6e33c9b1-026a-43c6-bc50-a787f5c4ccc0)
-![Screenshot 2024-12-17 153716](https://github.com/user-attachments![Screenshot 2024-12-17 153734](https://github.com/user-attachments/assets/12571a8d-2965-4ea1-bc2b-45301a585952)
-/assets/10a8337c-75cb-4f22-8bff-3730fe7fb57f)
+![Screenshot 2024-12-17 153716](https://github.com/user-attachments/assets/5294cc72-2fd5-453f-8fed-4fe0b2ad175d)
+![Screenshot 2024-12-17 153734](https://github.com/user-attachments/assets/c3902a94-e684-46b5-b742-67015ff4d707)
