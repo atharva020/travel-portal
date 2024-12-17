@@ -35,3 +35,5 @@ Before running this project, make sure you have the following installed:
 ## Installation
 
 1. Clone the repository
+```bash
+git clone https://github.com/atharva020/travel-portal.git
